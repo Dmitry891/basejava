@@ -5,6 +5,7 @@ import java.util.Arrays;
  */
 public class ArrayStorage {
     Resume[] storage = new Resume[10000];
+    private int size = 0;
 
     void clear() {
         Arrays.fill(storage, null);
@@ -14,13 +15,14 @@ public class ArrayStorage {
         for(int i = 0; i < storage.length; i++) {
             if(storage[i] == null) {
                 storage[i] = r;
+                size++;
                 break;
             }
         }
     }
 
     Resume get(String uuid) {
-        for(int i = 0; i <= size(); i++) {
+        for(int i = 0; i < size; i++) {
             if (storage[i].uuid.equals(uuid)) {
                 return storage[i];
             }
@@ -30,15 +32,11 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
-        int i;
-        for (i = 0; i <= size(); i++) {
+        for (int i = 0; i < size; i++) {
             if (storage[i].uuid.equals(uuid)) {
-                Resume[] copy = new Resume[storage.length - 1];
                 System.arraycopy(storage, 0, storage, 0, i);
-                System.arraycopy(storage, i + 1, copy, i, storage.length - i - 1);
-                storage = copy;
+                System.arraycopy(storage, i + 1, storage, i, storage.length - i - 1);
             } else {
-                //System.out.println("Данного резюме нет в базе!");
                 break;
             }
         }
@@ -48,16 +46,10 @@ public class ArrayStorage {
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        return Arrays.copyOf(storage, size() + 1);
+        return Arrays.copyOf(storage, size);
     }
 
     int size() {
-        int size = 0;
-        for(int i = 0; i < storage.length; i++) {
-            if(storage[i] != null) {
-                size = i;
-            }
-        }
         return size;
     }
 }
