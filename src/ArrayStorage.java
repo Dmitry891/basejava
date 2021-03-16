@@ -12,13 +12,8 @@ public class ArrayStorage {
     }
 
     void save(Resume r) {
-        for(int i = 0; i < storage.length; i++) {
-            if(storage[i] == null) {
-                storage[i] = r;
-                size++;
-                break;
-            }
-        }
+        storage[size] = r;
+        size++;
     }
 
     Resume get(String uuid) {
@@ -34,8 +29,8 @@ public class ArrayStorage {
     void delete(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].uuid.equals(uuid)) {
-                System.arraycopy(storage, 0, storage, 0, i);
-                System.arraycopy(storage, i + 1, storage, i, storage.length - i - 1);
+                System.arraycopy(storage, i + 1, storage, i, size - 1);
+                storage[size - 1] = null;
             } else {
                 break;
             }
