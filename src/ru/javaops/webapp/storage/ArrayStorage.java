@@ -7,34 +7,35 @@ import java.util.Arrays;
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    Resume[] storage = new Resume[10000];
+    Resume[] storage = new Resume[10_000];
     private int size = 0;
 
-    public void save(Resume r) {
-        if(getIndex(r.getUuid()) != -1) {
-            System.out.println("Резюме " + r.getUuid() + " уже есть в базе!");
+    public void save(Resume resume) {
+        if(getIndex(resume.getUuid()) != -1) {
+            System.out.println("Резюме " + resume.getUuid() + " уже есть в базе!");
         } else if(size == storage.length) {
             System.out.println("База резюме переполнена!");
         } else {
-            storage[size] = r;
+            storage[size] = resume;
             size++;
         }
     }
 
-    public void update(Resume r) {
-        int index = getIndex(r.getUuid());
-        if(getIndex(r.getUuid()) == -1) {
-            System.out.println("Резюме " + r.getUuid() + " не существует!");
+    public void update(Resume resume) {
+        int index = getIndex(resume.getUuid());
+        String getUuid = resume.getUuid();
+        if(getIndex(getUuid) == -1) {
+            System.out.println("Резюме " + getUuid + " не существует!");
         } else {
-            storage[index] = r;
-            System.out.println("Резюме " + r.getUuid() + " перезаписано!");
+            storage[index] = resume;
+            System.out.println("Резюме " + getUuid + " перезаписано!");
         }
     }
 
     public Resume get(String uuid) {
         int index = getIndex(uuid);
         if(index == -1) {
-            System.out.println("Данного резюме нет в базе");
+            System.out.println("Резюме " + uuid + " нет в базе!");
             return null;
         }
         return storage[index];
@@ -54,9 +55,9 @@ public class ArrayStorage {
     public void delete(String uuid) {
         int index = getIndex(uuid);
         if(index == -1) {
-            System.out.println("Данного резюме нет в базе");
+            System.out.println("Резюме " + uuid + " нет в базе!");
         } else {
-            System.arraycopy(storage, index + 1, storage, index, size - 1);
+            System.arraycopy(storage, index + 1, storage, index, size - index - 1);
             storage[size - 1] = null;
         }
     }
