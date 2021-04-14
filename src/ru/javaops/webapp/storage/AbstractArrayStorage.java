@@ -1,5 +1,8 @@
 package ru.javaops.webapp.storage;
 
+import ru.javaops.webapp.exception.ExistStorageException;
+import ru.javaops.webapp.exception.NotExistStorageException;
+import ru.javaops.webapp.exception.StorageException;
 import ru.javaops.webapp.model.Resume;
 
 import java.util.Arrays;
@@ -16,9 +19,9 @@ public abstract class AbstractArrayStorage implements Storage {
     public void save(Resume resume) {
         int index = getIndex(resume.getUuid());
         if (index > 0) {
-            System.out.println("Резюме " + resume.getUuid() + " уже есть в базе!");
+            throw new ExistStorageException(resume.getUuid());
         } else if (size == STORAGE_LIMIT) {
-            System.out.println("База резюме переполнена!");
+            throw new StorageException("Storage Overflow", resume.getUuid());
         } else {
             insertElement(resume, index);
             size++;
@@ -28,7 +31,7 @@ public abstract class AbstractArrayStorage implements Storage {
     public void delete(String uuid) {
         int index = getIndex(uuid);
         if (index > 0) {
-            System.out.println("Резюме " + uuid + " нет в базе!");
+            throw new NotExistStorageException(uuid);
         } else {
             fillDeletedElement(index);
             storage[size - 1] = null;
@@ -39,8 +42,7 @@ public abstract class AbstractArrayStorage implements Storage {
     public Resume get(String uuid) {
         int index = getIndex(uuid);
         if (index < 0) {
-            System.out.println("Резюме " + uuid + " нет в базе!");
-            return null;
+            throw new NotExistStorageException(uuid);
         }
         return storage[index];
     }
@@ -54,7 +56,7 @@ public abstract class AbstractArrayStorage implements Storage {
         int index = getIndex(resume.getUuid());
         String getUuid = resume.getUuid();
         if (getIndex(getUuid) < 0) {
-            System.out.println("Резюме " + getUuid + " не существует!");
+            throw new NotExistStorageException(resume.getUuid());
         } else {
             storage[index] = resume;
             System.out.println("Резюме " + getUuid + " перезаписано!");

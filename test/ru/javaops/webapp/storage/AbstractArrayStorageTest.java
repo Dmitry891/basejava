@@ -5,21 +5,27 @@ import org.junit.Before;
 import ru.javaops.webapp.exception.NotExistStorageException;
 import ru.javaops.webapp.model.Resume;
 
-import static org.junit.Assert.*;
 
 public abstract class AbstractArrayStorageTest {
     private Storage storage;
     private static final String UUID_1 = "uuid1";
-    private static final String UUID_2 = "uuid1";
-    private static final String UUID_3 = "uuid1";
+    private static final String UUID_2 = "uuid2";
+    private static final String UUID_3 = "uuid3";
+    private static final String UUID_4 = "uuid4";
+
+    public AbstractArrayStorageTest(Storage storage) {
+        this.storage = storage;
+    }
 
     @Before
     public void setUp() throws Exception {
         storage.clear();
         storage.save(new Resume(UUID_1));
-        storage.save(new Resume(UUID_1));
-        storage.save(new Resume(UUID_1));
+        storage.save(new Resume(UUID_2));
+        storage.save(new Resume(UUID_3));
+       // storage.save(new Resume(UUID_4));
     }
+
 
     @org.junit.Test
     public void size() {
@@ -28,14 +34,23 @@ public abstract class AbstractArrayStorageTest {
 
     @org.junit.Test
     public void save() {
+        storage.save(new Resume(UUID_4));
+        Assert.assertEquals(4, storage.size());
+        Assert.assertEquals(new Resume(UUID_4), storage.get(UUID_4));
     }
 
-    @org.junit.Test
+    @org.junit.Test (expected = NotExistStorageException.class)
     public void delete() {
+        storage.delete(UUID_3);
+        Assert.assertEquals(3, storage.size());
+        storage.get(UUID_3);
     }
 
     @org.junit.Test
     public void get() {
+        Assert.assertEquals(new Resume(UUID_1), storage.get("uuid1"));
+        Assert.assertEquals(new Resume(UUID_2), storage.get("uuid2"));
+        Assert.assertEquals(new Resume(UUID_3), storage.get("uuid3"));
     }
 
     @org.junit.Test(expected = NotExistStorageException.class)
@@ -45,13 +60,23 @@ public abstract class AbstractArrayStorageTest {
 
     @org.junit.Test
     public void clear() {
+        storage.clear();
+        Assert.assertEquals(0, storage.size());
     }
 
     @org.junit.Test
     public void update() {
+        Resume resume = new Resume(UUID_1);
+        storage.save(resume);
+        Assert.assertEquals(resume, storage.get(UUID_1));
     }
 
     @org.junit.Test
     public void getAll() {
+        Resume[] all = storage.getAll();
+        Assert.assertEquals(3, all.length);
+        Assert.assertEquals(new Resume(UUID_1), all[0]);
+        Assert.assertEquals(new Resume(UUID_2), all[1]);
+        Assert.assertEquals(new Resume(UUID_3), all[2]);
     }
 }
