@@ -44,17 +44,17 @@ public abstract class AbstractArrayStorageTest {
         storage.save(new Resume(UUID_1));
     }
 
-    @Test(expected = StorageException.class)
-    public void saveOverflow() throws Exception {
-        try {
-            for (int i = 4; i <= AbstractArrayStorage.STORAGE_LIMIT; i++) {
-                storage.save(new Resume());
-            }
-        } catch (StorageException exception) {
-            Assert.fail();
-        }
-        storage.save(new Resume());
-    }
+//    @Test(expected = StorageException.class)
+//    public void saveOverflow() throws Exception {
+//        try {
+//            for (int i = 4; i <= AbstractArrayStorage.STORAGE_LIMIT; i++) {
+//                storage.save(new Resume());
+//            }
+//        } catch (StorageException exception) {
+//            Assert.fail();
+//        }
+//        storage.save(new Resume());
+//    }
 
     @Test(expected = NotExistStorageException.class)
     public void delete() {
