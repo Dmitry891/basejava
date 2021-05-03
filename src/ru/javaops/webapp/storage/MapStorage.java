@@ -4,9 +4,10 @@ import ru.javaops.webapp.model.Resume;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class MapStorage extends AbstractStorage {
-    private Map<String, Resume> map = new HashMap<>();
+    private TreeMap<String, Resume> map = new TreeMap<>();
 
     @Override
     protected boolean isExist(Object key) {
