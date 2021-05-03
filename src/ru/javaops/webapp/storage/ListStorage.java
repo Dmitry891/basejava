@@ -4,7 +4,6 @@ import ru.javaops.webapp.model.Resume;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class ListStorage extends AbstractStorage {
     private List<Resume> list = new ArrayList<>();
@@ -60,8 +59,8 @@ public class ListStorage extends AbstractStorage {
         return key != null;
     }
 
-    @Override
-    protected boolean isNotExist(Object key) {
-        return key == null;
-    }
+//    @Override
+//    protected boolean isNotExist(Object key) {
+//        return key == null;
+//    }
 }
