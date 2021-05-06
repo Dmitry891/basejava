@@ -4,6 +4,7 @@ import ru.javaops.webapp.exception.StorageException;
 import ru.javaops.webapp.model.Resume;
 
 import java.util.Arrays;
+import java.util.List;
 
 public abstract class AbstractArrayStorage extends AbstractStorage {
     protected static final int STORAGE_LIMIT = 10_000;
@@ -47,19 +48,15 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         storage[(Integer) index] = resume;
     }
 
-    public Resume[] getAll() {
-        return Arrays.copyOf(storage, size);
+    @Override
+    public List<Resume> doCopyAll() {
+        return Arrays.asList(Arrays.copyOf(storage, size));
     }
 
     @Override
     protected boolean isExist(Object index) {
         return (Integer) index >= 0;
     }
-
-//    @Override
-//    protected boolean isNotExist(Object index) {
-//        return (Integer) index < 0;
-//    }
 
     protected abstract Integer getKey(String uuid);
 
