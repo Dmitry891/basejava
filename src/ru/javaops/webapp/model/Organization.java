@@ -13,11 +13,12 @@ import static ru.javaops.webapp.util.DateUtil.NOW;
 
 public class Organization {
     private final Link homePage;
-    private List<Position> position = new ArrayList<>();
+    private List<Position> position;
 
     public Organization(String name, String url, Position... position) {
         this(new Link(name, url), Arrays.asList(position));
     }
+
     public Organization(Link homePage, List<Position> position) {
         this.homePage = homePage;
         this.position = position;
@@ -50,10 +51,10 @@ public class Organization {
         public Position(int startYear, Month startMonth, String title, String description) {
             this(DateUtil.of(startYear, startMonth), NOW, title, description);
         }
+
         public Position(int startYear, Month startMonth, int endYear, Month endMonth, String title, String description) {
             this(DateUtil.of(startYear, startMonth), NOW, title, description);
         }
-
 
         public Position(LocalDate dateOfStart, LocalDate dateOfFinish, String title, String description) {
             Objects.requireNonNull(dateOfStart, "dateOfStart must not be null");

@@ -55,14 +55,6 @@ public abstract class AbstractStorage<Key> implements Storage {
         return key;
     }
 
-    @Override
-    public List<Resume> getAllSorted() {
-        LOG.info("getAllSorted");
-        List<Resume> list = doCopyAll();
-        Collections.sort(list);
-        return list;
-    }
-
     protected abstract List<Resume> doCopyAll();
 
     protected abstract boolean isExist(Key key);
@@ -76,4 +68,12 @@ public abstract class AbstractStorage<Key> implements Storage {
     protected abstract void doUpdate(Resume resume, Key key);
 
     protected abstract Resume doGet(Key key);
+
+    @Override
+    public List<Resume> getAllSorted() {
+        LOG.info("getAllSorted");
+        List<Resume> list = doCopyAll();
+        Collections.sort(list);
+        return list;
+    }
 }

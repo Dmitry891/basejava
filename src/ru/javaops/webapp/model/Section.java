@@ -1,5 +1,5 @@
 package ru.javaops.webapp.model;
 
-abstract public class Section {
+public abstract class Section {
 
 }
