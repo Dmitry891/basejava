@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class MainFile {
     public static void main(String[] args) {
-        String filePath = ".\\.gitignore";
+        String filePath = "H:\\basejava\\basejava\\.gitignore";
 
         File file = new File(filePath);
         try {
@@ -15,7 +15,7 @@ public class MainFile {
             throw new RuntimeException("Error", e);
         }
 
-        File dir = new File("./src/ru/javawebinar/basejava");
+        File dir = new File("H:\\basejava\\basejava\\src\\ru\\javaops\\webapp");
         System.out.println(dir.isDirectory());
         String[] list = dir.list();
         if (list != null) {
@@ -23,24 +23,23 @@ public class MainFile {
                 System.out.println(name);
             }
         }
-
         try (FileInputStream fis = new FileInputStream(filePath)) {
             System.out.println(fis.read());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        printDirectoryDeeply(dir);
+        printDirectoryDeeply(dir, "");
     }
 
-    public static void printDirectoryDeeply(File dir) {
+    public static void printDirectoryDeeply(File dir, String space) {
         File[] files = dir.listFiles();
         if (files != null) {
             for (File file : files) {
                 if (file.isFile()) {
-                    System.out.println("File: " + file.getName());
+                    System.out.println(space + "File:" + file.getName());
                 } else if (file.isDirectory()) {
-                    System.out.println("Directory: " + file.getName());
-                    printDirectoryDeeply(file);
+                    System.out.println(space + "Directory:" + file.getName());
+                    printDirectoryDeeply(file, space + "    ");
                 }
             }
         }

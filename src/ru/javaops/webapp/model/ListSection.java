@@ -1,11 +1,11 @@
 package ru.javaops.webapp.model;
 
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.List;
 import java.util.Arrays;
 
-public class ListSection extends Section {
+public class ListSection extends AbstractSection {
+    private static final long serialVersionUID = 1L;
     private final List<String> items;
 
     public ListSection(String... items) {

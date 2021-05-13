@@ -2,6 +2,7 @@ package ru.javaops.webapp.model;
 
 import ru.javaops.webapp.util.DateUtil;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
@@ -11,7 +12,8 @@ import java.util.Objects;
 
 import static ru.javaops.webapp.util.DateUtil.NOW;
 
-public class Organization {
+public class Organization implements Serializable {
+    private static final long serialVersionUID = 1L;
     private final Link homePage;
     private List<Position> position;
 
@@ -29,7 +31,7 @@ public class Organization {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Organization that = (Organization) o;
-        return homePage.equals(that.homePage) && position.equals(that.position);
+        return Objects.equals(homePage, that.homePage) && Objects.equals(position, that.position);
     }
 
     @Override
@@ -42,7 +44,7 @@ public class Organization {
         return "Organization{" + "homePage=" + homePage + "position" + position + '}';
     }
 
-    public static class Position {
+    public static class Position implements Serializable {
         private final LocalDate dateOfStart;
         private final LocalDate dateOfFinish;
         private final String title;
@@ -71,7 +73,7 @@ public class Organization {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             Position position = (Position) o;
-            return dateOfStart.equals(position.dateOfStart) && dateOfFinish.equals(position.dateOfFinish) && title.equals(position.title) && description.equals(position.description);
+            return Objects.equals(dateOfStart, position.dateOfStart) && Objects.equals(dateOfFinish, position.dateOfFinish) && Objects.equals(title, position.title) && Objects.equals(description, position.description);
         }
 
         @Override
