@@ -1,13 +1,19 @@
 package ru.javaops.webapp.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.List;
 import java.util.Objects;
 import java.util.Arrays;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class OrganizationSection extends AbstractSection {
     private static final long serialVersionUID = 1L;
 
-    private final List<Organization> organization;
+    public OrganizationSection() {
+    }
+
+    private List<Organization> organization;
 
     public OrganizationSection(Organization... organizations) {
         this(Arrays.asList(organizations));
@@ -34,11 +40,12 @@ public class OrganizationSection extends AbstractSection {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrganizationSection that = (OrganizationSection) o;
-        return Objects.equals(organization, that.organization);
+        return organization.equals(that.organization);
+
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(organization);
+        return organization.hashCode();
     }
 }

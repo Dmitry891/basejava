@@ -8,13 +8,14 @@ import ru.javaops.webapp.exception.NotExistStorageException;
 import ru.javaops.webapp.model.Resume;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
 public abstract class AbstractStorageTest {
-    protected static final File STORAGE_DIR = new File("H:\\basejava\\basejava\\storage");
+    protected static final File STORAGE_DIR = new File("F:\\basejava\\basejava\\storage");
     protected Storage storage;
     private static final String UUID_1 = "uuid1";
     private static final String UUID_2 = "uuid2";

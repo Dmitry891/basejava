@@ -6,10 +6,13 @@ import java.util.Arrays;
 
 public class ListSection extends AbstractSection {
     private static final long serialVersionUID = 1L;
-    private final List<String> items;
+    private List<String> items;
 
     public ListSection(String... items) {
         this(Arrays.asList(items));
+    }
+
+    public ListSection() {
     }
 
     public ListSection(List<String> items) {
@@ -34,10 +37,11 @@ public class ListSection extends AbstractSection {
         if (o == null || getClass() != o.getClass()) return false;
         ListSection that = (ListSection) o;
         return items.equals(that.items);
+
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(items);
+        return items.hashCode();
     }
 }
