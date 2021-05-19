@@ -10,17 +10,18 @@ public class MainDeadLock {
     }
 
     private static void printDeadLock(String lock1, String lock2) {
-        System.out.println(Thread.currentThread().getName() + " thread is trying to capture " + lock1);
+        String name = Thread.currentThread().getName();
+        System.out.println(name + " thread is trying to capture " + lock1);
         synchronized (lock1) {
-            System.out.println(Thread.currentThread().getName() + " has captured the object " + lock1);
+            System.out.println(name + " has captured the object " + lock1);
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println(Thread.currentThread().getName() + " thread is trying to capture " + lock2);
+            System.out.println(name + " thread is trying to capture " + lock2);
             synchronized (lock2) {
-                System.out.println(Thread.currentThread().getName() + " has captured the object " + lock2);
+                System.out.println(name + " has captured the object " + lock2);
             }
         }
     }
