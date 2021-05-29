@@ -1,13 +1,24 @@
 package ru.javaops.webapp;
 
 import java.time.Month;
+import java.util.UUID;
 
 import ru.javaops.webapp.model.*;
 
 public class ResumeTestDate {
 
+    public static final String UUID_1 = UUID.randomUUID().toString();
+    public static final String UUID_2 = UUID.randomUUID().toString();
+    public static final String UUID_3 = UUID.randomUUID().toString();
+    public static final String UUID_4 = UUID.randomUUID().toString();
+
+    public static final Resume RESUME_1 = fillResumeFor(UUID_1, "FFFF");
+    public static final Resume RESUME_2 = getTestResume(UUID_2, "JJJJ");
+    public static final Resume RESUME_3 = getTestResume(UUID_3, "AAAA");
+    public static final Resume RESUME_4 = getTestResume(UUID_4, "BBB");
+
     public static Resume getTestResume(String uuid, String fullname) {
-        Resume r = new Resume(uuid, "Григорий Кислин");
+        Resume r = new Resume(uuid, fullname);
         r.addContact(ContactType.MOBILE_PHONE, "+7(921) 855-0482");
         r.addContact(ContactType.SKYPE, "grigory.kislin");
         r.addContact(ContactType.E_MAIL, "gkislin@yandex.ru");
@@ -59,5 +70,9 @@ public class ResumeTestDate {
                 new Organization("Заочная физико-техническая школа при МФТИ", "http://www.school.mipt.ru/", new Organization.Position(1984, Month.of(9), 1987, Month.of(6), "слушатель", "Закончил с отличием"))));
 
         return r;
+    }
+
+    public static Resume fillResumeFor(String uuid, String fullname) {
+        return new Resume(uuid, fullname);
     }
 }
