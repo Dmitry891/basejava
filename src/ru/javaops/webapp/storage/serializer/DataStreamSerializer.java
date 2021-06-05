@@ -32,9 +32,9 @@ public class DataStreamSerializer implements StreamSerializer {
                         Link homePage = org.getHomePage();
                         dos.writeUTF(homePage.getName());
                         dos.writeUTF(homePage.getUrl());
-                        writeCollection(dos, org.getPosition(), position -> {
-                            writeLocalDate(dos, position.getDateOfStart());
-                            writeLocalDate(dos, position.getDateOfFinish());
+                        writeCollection(dos, org.getPositions(), position -> {
+                            writeLocalDate(dos, position.getStartDate());
+                            writeLocalDate(dos, position.getEndDate());
                             dos.writeUTF(position.getTitle());
                             dos.writeUTF(position.getDescription());
                         });
