@@ -21,10 +21,10 @@ public abstract class AbstractStorageTest {
     private static final String UUID_3 = UUID.randomUUID().toString();
     private static final String UUID_4 = UUID.randomUUID().toString();
 
-    protected static final Resume RESUME_1 = ResumeTestDate.getTestResume(UUID_1, "JJJ");
-    protected static final Resume RESUME_2 = ResumeTestDate.getTestResume(UUID_2, "FFF");
-    protected static final Resume RESUME_3 = ResumeTestDate.getTestResume(UUID_3, "DDD");
-    protected static final Resume RESUME_4 = ResumeTestDate.getTestResume(UUID_4, "SSS");
+    protected static final Resume RESUME_1 = ResumeTestDate.getTestResume(UUID_1, "Григорий Кислин");
+    protected static final Resume RESUME_2 = ResumeTestDate.getTestResume(UUID_2, "Иван Иванов");
+    protected static final Resume RESUME_3 = ResumeTestDate.getTestResume(UUID_3, "Пётр Петров");
+    protected static final Resume RESUME_4 = ResumeTestDate.getTestResume(UUID_4, "Ричард Сидоров");
 
     public AbstractStorageTest(Storage storage) {
         this.storage = storage;

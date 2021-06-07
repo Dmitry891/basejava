@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 public class ListSection extends AbstractSection {
     private static final long serialVersionUID = 1L;
+    public static final AbstractSection EMPTY = new ListSection("");
     private List<String> items;
 
     public ListSection(String... items) {

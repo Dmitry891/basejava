@@ -24,3 +24,4 @@ public class DateUtil {
         return LocalDate.of(yearMonth.getYear(), yearMonth.getMonth(), 1);
     }
 }
+
