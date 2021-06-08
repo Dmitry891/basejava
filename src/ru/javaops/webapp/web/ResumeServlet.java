@@ -19,6 +19,7 @@ import javax.servlet.ServletException;
 
 public class ResumeServlet extends HttpServlet {
 
+
     private Storage storage; // = Config.get().getStorage();
 
     @Override
@@ -62,7 +63,14 @@ public class ResumeServlet extends HttpServlet {
                         break;
                     case ACHIEVEMENT:
                     case QUALIFICATION:
-                        r.addSection(type, new ListSection(value.split("\\n")));
+                        List<String> list = new ArrayList<>();
+                        for (String str : value.split("\r\n")) {
+                            if (!str.equals("")) {
+                                list.add(str);
+                            }
+                        }
+                        r.addSection(type, new ListSection(list));
+//                      r.addSection(type, new ListSection(value.split("\\n")));
                         break;
                     case EDUCATION:
                     case EXPERIENCE:
