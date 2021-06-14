@@ -17,9 +17,10 @@
 <section>
   <form method="post" action="resume" enctype="application/x-www-form-urlencoded">
     <input type="hidden" name="uuid" value="${resume.uuid}">
-    <h1>Имя:</h1>
     <dl>
-      <input type="text" name="fullName" size=55 value="${resume.fullName}">
+      <dt>Имя:</dt>
+      <dd><input type="text" name="fullName" size=30 value="${resume.fullName}" required
+                 placeholder="Введите имя"></dd>
     </dl>
     <h2>Контакты:</h2>
     <c:forEach var="type" items="<%=ContactType.values()%>">
